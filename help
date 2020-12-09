@@ -1,0 +1,26 @@
+library IEEE;
+	use IEEE.STD_LOGIC_1164.ALL;
+	use IEEE.STD_LOGIC_ARITH.ALL;
+	use IEEE.STD_LOGIC_UNSIGNED.ALL;
+	entity shiftreg8bit is
+	port (CLK, ClrN, SI:in std_logic;SO:out std_logic);
+	end shiftreg8bit is
+	port(CLK, ClrN, SI;in std_logic;SO;out std_logic);
+	end shiftreg8bit;
+	architecture Behshreg8bit of shiftreg8bit is
+	signal Qreg:std_logic_vector(7 downto 0):=x"00";
+	begin
+	process(CLK,ClrN)
+	begin
+	if ClrN='O' then
+	Qreg<="00000000"
+	elsif(CLK'event and CLK='1')then
+	for i in 0 to 6 loop
+	Qreg(i)<Qreg(i+1);
+	end loop;
+	Qreg(7)<=SI;
+	end if;
+	SO<=Qreg(0);
+
+
+                
