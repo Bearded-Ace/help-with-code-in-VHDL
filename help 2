@@ -1,0 +1,24 @@
+entity couter1_sm is
+	port(clk: in bit; Output: out bit_vector(2 downto 0));
+end counterl_sm;
+
+architecture counterl_sm of counter1_sm is
+signal State: bit_vector(2 downto 0):= "000";
+begin
+	process(clk)
+	begin
+		if (clk'event AND clk='1') then
+			case State is
+				when "000" => State <= "010" ;
+				when "010" => State <= "100" ;
+				when "110" => State <= "101" ;
+				when "001" => State <= "110" ;
+				when "011" => State <= "111" ;
+				when "101" => State <= "100" ;
+				when "111" => State <= "101" ;
+				when others => State <= "111" ;
+			end case;
+		end if;
+	end process:
+	Output <= State;
+end counter1_sm;
